@@ -20,7 +20,23 @@ var router = express.Router();
 
 //declaramos las rutas donde escucharemos.
 router.get('/', function(req, res) {
-   res.send("Hello World!");
+
+  var users = [];
+
+  //TODO obtener de mongo los datos.
+  //TODO recorrer la lista que sale de mongo y añadirlo al obtejo users para la respuesta.
+  var user = {
+    "name": "name",
+    "email": "aaa@bb.com",
+    "username" : "username",
+    "phone" : "123456789"
+  }
+
+  users.push(user);
+
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify(users));
+
 });
 
 app.use(router);
