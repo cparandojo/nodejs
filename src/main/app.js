@@ -3,23 +3,34 @@
  * Importamos las dependencias necesarias.
  */
 var express = require("express");//facilita crear el servidor y hacer llamadas http
+var bodyParser  = require("body-parser");
+var methodOverride = require("method-override");
+var httpService = require("../service/httpservice.js");
+
+
+
 var app = express();
 
-var bodyParser  = require("body-parser");
-
-var methodOverride = require("method-override");
-
-var mongoose = require('mongoose');
-
 app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use(bodyParser.json());//permite que pueda parsear JSON
 app.use(methodOverride());//permite personalizar metodos http
 
-var router = express.Router();
+//añadimos el uso de obtencion de usuarios a partir del servicio.
+app.use(httpService.getUsers());
+
+//arrancamos nuestro servidor.
+app.listen(8080, function() {
+  console.log("Node server running on http://localhost:8080");
+});
+
+
+//var mongoose = require('mongoose');
+
+//var router = express.Router();
 
 //declaramos las rutas donde escucharemos.
-router.get('/', function(req, res) {
+/*
+router.get('/users', function(req, res) {
 
   var users = [];
 
@@ -37,13 +48,9 @@ router.get('/', function(req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify(users));
 
-});
+});*/
 
-app.use(router);
 
-app.listen(8080, function() {
-  console.log("Node server running on http://localhost:8080");
-});
 
 /*
 mongoose.connect('mongodb://localhost/user', function(err, res) {
