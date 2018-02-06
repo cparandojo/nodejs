@@ -2,11 +2,11 @@
 /**
  * Importamos las dependencias necesarias.
  */
+
 var express = require("express");//facilita crear el servidor y hacer llamadas http
-var bodyParser  = require("body-parser");
+var bodyParser  = require("body-parser");//middleare body parser para recuperar el valor del parámetro enviado por POST
 var methodOverride = require("method-override");
 var httpService = require("../service/httpservice.js");
-
 
 
 var app = express();
@@ -16,7 +16,7 @@ app.use(bodyParser.json());//permite que pueda parsear JSON
 app.use(methodOverride());//permite personalizar metodos http
 
 //añadimos el uso de obtencion de usuarios a partir del servicio.
-app.use(httpService.getUsers());
+app.use(httpService.getHttpServices());
 
 //arrancamos nuestro servidor.
 app.listen(8080, function() {
