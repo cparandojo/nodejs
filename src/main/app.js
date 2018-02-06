@@ -6,7 +6,7 @@
 var express = require("express");//facilita crear el servidor y hacer llamadas http
 var bodyParser  = require("body-parser");//middleare body parser para recuperar el valor del parámetro enviado por POST
 var methodOverride = require("method-override");
-var httpService = require("../service/httpservice.js");
+var httpService = require('../service/users/httpservice.js');
 
 
 var app = express();
@@ -19,8 +19,8 @@ app.use(methodOverride());//permite personalizar metodos http
 app.use(httpService.getHttpServices());
 
 //arrancamos nuestro servidor.
-app.listen(8080, function() {
-  console.log("Node server running on http://localhost:8080");
+app.listen(3000, function() {
+  console.log("Node server running on http://localhost:3000");
 });
 
 
