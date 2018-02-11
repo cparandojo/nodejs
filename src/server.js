@@ -17,19 +17,19 @@ const router = require('./router.js');
 const port = 3000;
 
 //Indicamos el archivo que sera nuestro proceso hijo.
-const userProcessUrl = './process/user/addUserProcess.js';
+const addUserProcessUrl = './process/user/addUserProcess.js';
 
 //creamos nuestra variable de aplicación.
 const app = express();
 app.use(bodyParser.json());
 
 //creamos el proceso hijo con fork, que nos retorna una instancia de dicho proceso.
-const userProcess = fork(userProcessUrl);
+const addUserProcess = fork(addUserProcessUrl);
 
 //indicamos la url base sobre la que va a atender peticiones nuestro servidor.
 app.use('/api/v1/', router);
 
 //le añadimos nuestro proceso hijo bajo el nombre de userProcess
-app.set('userProcess', userProcess);
+app.set('addUserProcess', addUserProcess);
 
 app.listen(port);

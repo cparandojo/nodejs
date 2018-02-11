@@ -1,37 +1,35 @@
 
-const { getUsers,saveUser } = require('./model');
-
 const express = require('express');
+
+const {getUsers, getUserById} = require('./model/userModel.js');
 
 const router = express.Router();
 
 router.post('/user',(req,res)=>{
+    
     let data = req.body;
-    req.app.get('userProcess').send(data);
-    res.json(data);
-});
 
-/*
-router.get('/tweets', (req, res)=>{
-    getTweets().then((data)=>{
-        res.json(data);
-    })
-});
+    //realizamos llamada al proceso hijo.
+    req.app.get('addUserProcess').send(data);
 
-router.get('/tweeter/:id', (req, res)=>{
-    let id = req.param.id;
-    getTweets(id).then((data)=>{
-        res.json(data);
-    })
+    res.status(201).json(data);
 });
 
 
-router.post('tweets/find',(req, res)=>{
-    let filter = req.body;
-    getTweetsByFilter(filter).then((data) =>{
-        res.json(data);
+router.get('/users', (req, res)=>{
+
+    getUsers().then((data)=>{
+        res.status(200).json(data);
     });
-})*/
+});
 
+router.get('/users/:id', (req, res)=>{
+
+    let userId = req.params.id;
+
+    getUserById(userId).then((data)=>{
+        res.status(200).json(data);
+    });
+});
 
 module.exports = router;
