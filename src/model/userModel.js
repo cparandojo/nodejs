@@ -38,4 +38,9 @@ exports.getUserById = (userId)=>{
     return listUsers;
 };
 
+//Actualiza el modelo en base de datos
+exports.updateUser = (data) =>{
+    return User.update(data);
+};
+
 
