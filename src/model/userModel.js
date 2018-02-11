@@ -44,9 +44,6 @@ exports.updateUser = (data) =>{
     let jsonBusqueda= {_id:data.id};
     var newvalues ={$set: {name: data.name, username: data.username, email:data.email, phone:data.phone } };
 
-    console.log(jsonBusqueda);
-    console.log(newvalues);
-
     return User.findOneAndUpdate(jsonBusqueda,newvalues);
 };
 
