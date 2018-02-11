@@ -43,4 +43,9 @@ exports.updateUser = (data) =>{
     return User.update(data);
 };
 
+//Borrado de un usuario por id.
+exports.deleteUser = (userId) =>{
+    let jsonBusqueda= {_id:userId};
+    return User.remove(jsonBusqueda);
+};
 
