@@ -54,9 +54,10 @@ router.get('/users/:id', (req, res)=>{
 
 
 //actualización de usuario con proceso hijo.
-router.patch('/users', (req, res)=>{
+router.patch('/users/:id', (req, res)=>{
    
     let data = req.body;
+    data.id = req.params.id;
 
     //realizamos llamada al proceso hijo.
     req.app.get('updateUserProcess').send(data);

@@ -21,8 +21,7 @@ Para poder ejecutar este servidor debemos seguir los pasos:
     - actualizar: PATCH http://localhost:3000/api/v1/users/ID 
         ID: identificador del usuario en base de datos
         body:
-            {
-                "_id": "5a80683a71824e20f0cdd9e9",
+            {                
                 "name": "modifi",
                 "username": "modifi",
                 "email": "modifi",
