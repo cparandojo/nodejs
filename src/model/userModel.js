@@ -53,3 +53,8 @@ exports.deleteUser = (userId) =>{
     return User.remove(jsonBusqueda);
 };
 
+//Borrado de todos los usuarios.
+exports.deleteAll = () =>{
+    return User.remove({});
+};
+

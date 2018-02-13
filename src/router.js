@@ -2,7 +2,7 @@
 const express = require('express');
 
 //importamos solo las funciones del modelo que vamos a usar desde el router.
-const {getUsers, getUserById, deleteUser} = require('./model/userModel.js');
+const {getUsers, getUserById, deleteUser, deleteAll} = require('./model/userModel.js');
 
 const router = express.Router();
 
@@ -77,6 +77,22 @@ router.delete('/users/:id', (req, res)=>{
 
     }).catch((err) => {
         console.log('Error borrando usuario con id ', userId);
+        console.log(err);
+        res.status(500).json({success:false});
+    });   
+});
+
+//eliminación de todos los usuarios
+router.delete('/users', (req, res)=>{
+   
+    let userId = req.params.id;
+    
+    deleteAll().then((data)=>{
+        console.log('Usuarios borrados correctamente')
+        res.status(200).json({success:true});
+
+    }).catch((err) => {
+        console.log('Error borrando usuarios');
         console.log(err);
         res.status(500).json({success:false});
     });   

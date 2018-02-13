@@ -10,7 +10,7 @@ Para poder ejecutar este servidor debemos seguir los pasos:
 5- El servidor esta arrancado en el puerto 3000. Cualquier petición ira sobre la url base : http://localhost:3000/api/v1/
 6- Esta implementado un CRUD con para crear, actualizar, borrar y listar usuarios. Por tanto la url quedaria asi:
 
-    -crear: POST:  http://localhost:3000/api/v1/users cuyo body sera:
+    -crear: POST:  http://localhost:3000/api/v1/user cuyo body sera:
         {
             "name":"nombre1",
             "username":"nom1",
@@ -30,6 +30,7 @@ Para poder ejecutar este servidor debemos seguir los pasos:
 
     - Borrado: DELETE http://localhost:3000/api/v1/users/ID 
         ID: identificador del usuario en base de datos
+		En caso de no especificar id se borran todos los usuarios
 
     - Listado : GET http://localhost:3000/api/v1/users
 
