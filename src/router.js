@@ -69,17 +69,12 @@ router.patch('/users/:id', (req, res)=>{
 //eliminación de usuario sin proceso hijo.
 router.delete('/users/:id', (req, res)=>{
    
-    let userId = req.params.id;
+    let data = req.body;
+    data.id = req.params.id;
     
-    deleteUser(userId).then((data)=>{
-        console.log('Usuario borrado correctamente')
-        res.status(200).json({success:true});
+    req.app.get('deleteUserProcess').send(data);
 
-    }).catch((err) => {
-        console.log('Error borrando usuario con id ', userId);
-        console.log(err);
-        res.status(500).json({success:false});
-    });   
+    res.status(200).json(data);  
 });
 
 //eliminación de todos los usuarios
