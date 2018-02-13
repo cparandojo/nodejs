@@ -23,6 +23,9 @@ const updateUserProcessUrl = './process/user/updateUserProcess.js';
 //creamos nuestra variable de aplicación.
 const app = express();
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+  }));
 
 //creamos el proceso hijo con fork, que nos retorna una instancia de dicho proceso.
 const addUserProcess = fork(addUserProcessUrl);
