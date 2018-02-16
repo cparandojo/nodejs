@@ -42,9 +42,11 @@ exports.getUserById = (userId)=>{
 exports.updateUser = (data) =>{
 
     let jsonBusqueda= {_id:data.id};
+
     var newvalues ={$set: {name: data.name, username: data.username, email:data.email, phone:data.phone } };
 
     return User.findOneAndUpdate(jsonBusqueda,newvalues);
+   
 };
 
 //Borrado de un usuario por id.

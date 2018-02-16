@@ -1,5 +1,9 @@
 
 const express = require('express');
+const { fork } = require('child_process');
+
+const addUserProcessUrl = './process/user/addUserProcess.js';
+const updateUserProcessUrl = './process/user/updateUserProcess.js';
 
 //importamos solo las funciones del modelo que vamos a usar desde el router.
 const {getUsers, getUserById, deleteUser, deleteAll} = require('./model/userModel.js');
@@ -12,11 +16,23 @@ router.post('/user',(req,res)=>{
     //obtenemos el campo body de la petición
     let data = req.body;
 
-    //realizamos llamada al proceso hijo.
-    req.app.get('addUserProcess').send(data);
+    //Obtenemos el proceso hijo
+    const addUserProcess = fork(addUserProcessUrl);
 
-    //Respondemos con OK
-    res.status(201).json(data);
+    //añadimos un evento al proceso hijo, para que envie los datos del json de respuesta.
+    addUserProcess.on('message', (responseBBDD) => {
+        res.status(201).json(responseBBDD);
+    });
+
+    addUserProcess.on('exit', () => {
+        //Respondemos con OK
+        res.status(500).json({error:'Error creando usuario.'});
+       
+    });
+
+    //ejecutamos el proceso.
+    addUserProcess.send(data);
+   
 });
 
 //listado de usuarios sin proceso hijo
@@ -56,13 +72,26 @@ router.get('/users/:id', (req, res)=>{
 //actualización de usuario con proceso hijo.
 router.patch('/users/:id', (req, res)=>{
    
+    
     let data = req.body;
     data.id = req.params.id;
 
     //realizamos llamada al proceso hijo.
-    req.app.get('updateUserProcess').send(data);
+    const updateUserProcess = fork(updateUserProcessUrl);
+   
+    //añadimos un evento al proceso hijo, para que envie los datos del json de respuesta.
+    updateUserProcess.on('message', (responseUpdateBBDD) => {
+        //Respondemos con OK
+         res.status(201).json(responseUpdateBBDD);
+    });
 
-    res.status(200).json(data);
+    updateUserProcess.on('exit', () => {
+        //Respondemos con OK
+        res.status(500).json({error:'Error actualizando usuario.'});
+       
+    });
+
+    updateUserProcess.send(data);   
    
 });
 
