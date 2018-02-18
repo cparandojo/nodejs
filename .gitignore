@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 nodejs.iml
 .idea
+=======
+node_modules/
+.vscode/launch.json
+>>>>>>> release/d
