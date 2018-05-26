@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/practicanodejs');
+mongoose.connect('mongodb://tft:tft@ds016118.mlab.com:16118/tft');
 mongoose.Promise = global.Promise;
 
 const UserSchema = mongoose.Schema({
